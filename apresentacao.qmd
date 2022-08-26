@@ -1,0 +1,78 @@
+---
+title: "Python para R"
+subtitle: "(e vice-versa)"
+author: "José Vítor"
+format:
+  revealjs:
+    incremental: true 
+    theme: dark
+    code-block-border-left: "#31BAE9"
+    code-block-bg: "#011627"
+    code-overflow: wrap
+    highlight-style: dracula
+    transition: fade
+    self-contained: true
+knitr:
+  opts_chunk:
+    echo: true
+    warnings: false
+editor: visual
+---
+
+
+
+<section class="title-slide">
+    <h1 style="text-align: center">Por que Python?</h1>
+</section>
+
+<section>
+<h2>Porque Python</h2>
+
+:::::: {.columns}
+
+
+:::: {.column width="50%"}
+- Sintaxe fácil
+
+::: {.fragment}
+```{python}
+def fatorial(n):
+  ans = 1
+  for i in range(1, n+1):
+    ans *= i
+  return ans
+
+print(fatorial(10))
+```
+:::
+
+- Suporte para TensorFlow, Spark, etc.
+
+::: {.fragment}
+```{python eval=FALSE}
+import pyspark
+from tensorflow import keras
+```
+:::
+
+::::
+
+:::: {.column width="50%"}
+
+- Comunidade vasta
+
+::: {.fragment}
+![](src/pyso.png)
+:::
+
+- Mais tópicos
+- Bla bla bla
+
+::::
+
+::::::
+</section>
+
+<section>
+<h2>Reticulate<h2>
+</section>
