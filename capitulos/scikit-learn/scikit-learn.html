@@ -4,7 +4,7 @@
   <meta name="generator" content="quarto-0.9.16">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="author" content="Pedro Lima">
-  <title>Utilizando o scikit-learn no R</title>
+  <title>Machine Learning com scikit-learn no R</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -748,11 +748,11 @@ color: #007BA5;
 </div>
 <main class="content" id="quarto-document-content">
 <header id="title-block-header">
-<h1 class="title display-7">Utilizando o scikit-learn no R</h1>
+<h1 class="title display-7">Machine Learning com scikit-learn no R</h1>
 <p class="author">Pedro Lima</p>
 </header>
 
-<p>O <a href="https://scikit-learn.org/stable/getting_started.html">scikit-learn</a> é uma biblioteca para Python que contém um vasto conjunto de algoritmos para processamento de dados e construção de modelos de machine learning implementados de maneira consistente, eficiente e de fácil utilização. É ainda acompanhado de uma <a href="https://scikit-learn.org/stable/user_guide.html">documentação</a> muito bem organizada, clara e repleta de exemplos e tutoriais.</p>
+<p>O <a href="https://scikit-learn.org/stable/getting_started.html">scikit-learn</a> é uma biblioteca para Python muito popular por conter um vasto conjunto de algoritmos para processamento de dados e construção de modelos de machine learning implementados de maneira consistente, eficiente e de fácil utilização. Conta ainda com uma <a href="https://scikit-learn.org/stable/user_guide.html">documentação</a> muito bem organizada, clara e repleta de exemplos e tutoriais.</p>
 <section id="o-que-você-pode-fazer-com-o-scikit-learn" class="level2">
 <h2 class="anchored" data-anchor-id="o-que-você-pode-fazer-com-o-scikit-learn">O que você pode fazer com o scikit-learn</h2>
 <ul>
@@ -766,8 +766,8 @@ color: #007BA5;
 </ul></li>
 <li><strong>Modelos</strong>
 <ul>
-<li><p><strong>Regressão:</strong> linear, logística, LASSO, ridge etc.</p></li>
-<li><p><strong>Classificação:</strong> árvores de decisão, regressão logística, análise de discriminante etc.</p></li>
+<li><p><strong>Regressão:</strong> linear, LASSO, ridge etc;</p></li>
+<li><p><strong>Classificação:</strong> regressão logística, árvore de decisão, support vector machine, análise de discriminante etc;</p></li>
 <li><p><strong>Clustering:</strong> K-means, misturas gaussianas etc.</p></li>
 </ul></li>
 <li><strong>Avaliação e seleção de modelos</strong>
@@ -787,17 +787,20 @@ color: #007BA5;
 <pre><code>Warning: package 'reticulate' was built under R version 4.1.3</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">"base"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#use_python("C:/Users/pedro/anaconda3")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use_python("C:/Users/pedro/anaconda3")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Caso a biblioteca scikit-learn não esteja instalada no Python, podemos usar o reticulate para fazer isso.</p>
+<blockquote class="blockquote">
+<p>O <a href="https://www.anaconda.com">Anaconda</a> é uma distribuição Python que permite manter múltiplas versões do interpretador, cada uma com seus próprios pacotes. Seu ambiente base vem por padrão com diversos pacotes para data science, incluindo o scikit-learn.</p>
+</blockquote>
+<p>Caso o pacote scikit-learn não esteja instalada no Python, podemos usar o reticulate para fazer isso.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#conda_install("base", "sklearn")</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#py_install("sklearn")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda_install("base", "sklearn")</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("sklearn")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exemplo" class="level3">
 <h3 class="anchored" data-anchor-id="exemplo">Exemplo</h3>
-<p>A própria biblioteca carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes.</p>
+<p>A própria biblioteca scikit carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes.</p>
 <p>Para exemplificar o uso do sklearn no R, utilizaremos o conjunto <em>breast cancer winconsin</em>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
@@ -810,23 +813,20 @@ color: #007BA5;
 </ul>
 <section id="divisão-em-treino-e-teste" class="level4">
 <h4 class="anchored" data-anchor-id="divisão-em-treino-e-teste">Divisão em treino e teste</h4>
-<p>No contexto de machine learning, é uma prática rotineira separar os dados em treino e teste, geralmente, numa proporção de 80/20. Isso ajuda a avaliar a capacidade de generalização do modelo para além dos dados de ajuste, e pode ser feito do seguinte modo no sklearn:</p>
+<p>No contexto de machine learning, é uma prática rotineira separar os dados em treino e teste, geralmente, numa proporção de 4 para 1. Isso ajuda a avaliar a capacidade de generalização do modelo para além dos dados de ajuste, e pode ser feito do seguinte modo no sklearn:</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X , y, train_size<span class="op">=</span><span class="fl">0.8</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>O parâmetro <code>random_state</code> fixa a semente de geração de números aleatórios, permitindo posteriormente reproduzir os resultados.</p>
+<p>O parâmetro <code>random_state</code> fixa a semente de geração de números aleatórios para a reprodução de resultados.</p>
 </blockquote>
 </section>
 <section id="pipeline" class="level4">
 <h4 class="anchored" data-anchor-id="pipeline">Pipeline</h4>
 <p>Um pipeline lembra o pipe <code>%&gt;%</code> do R, e descreve uma sequência de transformações seguida de um modelo. É muito útil para unificar e simplificar os processos de pré-processamento, estimação e ajuste de hiperparâmetros, bem como para fazer previsões.</p>
-<blockquote class="blockquote">
-<p><strong>(Vazamento de dados)</strong>. Garante que os mesmos dados, <code>X_train</code> e <code>y_train</code>, sejam utilizados em todas as etapas.</p>
-</blockquote>
-<p>O modelo de classificação consistirá de uma padronização de média e variância seguida de uma decomposição em componentes principais e enfim um modelo <em>support vector classifier</em>.</p>
+<p>O modelo de classificação consistirá de uma padronização de média e variância das variáveis seguida de uma decomposição em componentes principais e por fim um <em>support vector classifier</em>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -835,29 +835,35 @@ color: #007BA5;
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"scaler"</span>, StandardScaler()),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"pca"</span>, PCA(n_components<span class="op">=</span><span class="dv">4</span>)),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"pca"</span>, PCA(n_components<span class="op">=</span><span class="dv">5</span>)),</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"svc"</span>, LinearSVC(C<span class="op">=</span><span class="fl">8.71</span>))</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Tanto o parâmetro <code>n_components</code> do PCA quanto o <code>C</code> do LinearSVC são hiperparâmetros desse modelo, e podem ser ajustados utilizando os métodos do <code>GridSearchCV()</code>, <code>RandomSearchCV()</code> etc do módulo <code>model_selection</code> sobre o pipeline.</p>
+<p>Tanto o parâmetro <code>n_components</code> do PCA quanto o <code>C</code> do LinearSVC são hiperparâmetros desse modelo <code>model</code>, e podem ser ajustados utilizando os métodos do <code>GridSearchCV()</code>, <code>RandomSearchCV()</code> etc do módulo <code>model_selection</code> sobre o pipeline.</p>
 </blockquote>
-<p>Enfim, o ajuste do modelo utilizando os dados de <strong>treino</strong> e a verificação da acurácia no conjunto de <strong>teste</strong>.</p>
+<p>Segue o ajuste do modelo utilizando os dados de <strong>treino</strong>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>Pipeline(steps=[('scaler', StandardScaler()), ('pca', PCA(n_components=4)),
+<pre><code>Pipeline(steps=[('scaler', StandardScaler()), ('pca', PCA(n_components=5)),
                 ('svc', LinearSVC(C=8.71))])
 
 C:\Users\pedro\ANACON~1\lib\site-packages\sklearn\svm\_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
   warnings.warn("Liblinear failed to converge, increase "</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precisão:"</span>, accuracy_score(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>(Vazamento de dados)</strong>. Veja que o pipeline ajuda a reforçar o uso dos dados de <strong>treino</strong> em todas as etapas de construção do modelo.</p>
+</blockquote>
+<p>Agora, a verificação da acurácia no conjunto de <strong>teste</strong>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precisão:"</span>, accuracy_score(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>Precisão: 0.9736842105263158</code></pre>
+<pre><code>Precisão: 0.9824561403508771</code></pre>
 </div>
 </div>
 </section>
@@ -870,8 +876,8 @@ C:\Users\pedro\ANACON~1\lib\site-packages\sklearn\svm\_base.py:985: ConvergenceW
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>py<span class="sc">$</span>svc_coefs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>           [,1]      [,2]      [,3]       [,4]
-[1,] -0.6977085 0.3634845 0.1966923 -0.2964842</code></pre>
+<pre><code>           [,1]      [,2]      [,3]       [,4]      [,5]
+[1,] -0.7799688 0.4579872 0.1900542 -0.2977905 0.3186079</code></pre>
 </div>
 </div>
 </section>
@@ -880,7 +886,8 @@ C:\Users\pedro\ANACON~1\lib\site-packages\sklearn\svm\_base.py:985: ConvergenceW
 <section id="materiais" class="level2">
 <h2 class="anchored" data-anchor-id="materiais">Materiais</h2>
 <ol type="1">
-<li>Para mais informações sobre a biblioteca scikit-learn, veja a <a href="https://scikit-learn.org/stable/user_guide.html">documentação</a>.</li>
+<li>Para mais informações sobre a biblioteca scikit-learn, veja a sua <a href="https://scikit-learn.org/stable/getting_started.html">página</a> na web e <a href="https://scikit-learn.org/stable/user_guide.html">documentação</a>.</li>
+<li><a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">GÉRON, Aurelin (2019)</a>. Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow.</li>
 </ol>
 </section>
 </main>

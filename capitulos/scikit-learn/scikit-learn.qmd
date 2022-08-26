@@ -1,5 +1,5 @@
 ---
-title: "Utilizando o scikit-learn no R"
+title: "Machine Learning com scikit-learn no R"
 author: "Pedro Lima"
 format:
   html:
@@ -12,7 +12,7 @@ knitr:
 editor: visual
 ---
 
-O [scikit-learn](https://scikit-learn.org/stable/getting_started.html) é uma biblioteca para Python que contém um vasto conjunto de algoritmos para processamento de dados e construção de modelos de machine learning implementados de maneira consistente, eficiente e de fácil utilização. É ainda acompanhado de uma [documentação](https://scikit-learn.org/stable/user_guide.html) muito bem organizada, clara e repleta de exemplos e tutoriais.
+O [scikit-learn](https://scikit-learn.org/stable/getting_started.html) é uma biblioteca para Python muito popular por conter um vasto conjunto de algoritmos para processamento de dados e construção de modelos de machine learning implementados de maneira consistente, eficiente e de fácil utilização. Conta ainda com uma [documentação](https://scikit-learn.org/stable/user_guide.html) muito bem organizada, clara e repleta de exemplos e tutoriais.
 
 ## O que você pode fazer com o scikit-learn
 
@@ -23,9 +23,9 @@ O [scikit-learn](https://scikit-learn.org/stable/getting_started.html) é uma bi
     -   Imputação de missing values;
     -   Manipulação de dados em texto.
 -   **Modelos**
-    -   **Regressão:** linear, logística, LASSO etc.
+    -   **Regressão:** linear, LASSO, ridge etc;
 
-    -   **Classificação:** árvores de decisão, regressão logística, análise de discriminante etc.
+    -   **Classificação:** regressão logística, árvore de decisão, support vector machine, análise de discriminante etc;
 
     -   **Clustering:** K-means, misturas gaussianas etc.
 -   **Avaliação e seleção de modelos**
@@ -40,21 +40,21 @@ O primeiro passo é carregar o pacote `reticulate`. Em seguida, definimos a inst
 ```{r}
 library(reticulate)
 use_condaenv("base")
-#use_python("C:/Users/pedro/anaconda3")
+# use_python("C:/Users/pedro/anaconda3")
 ```
 
-> O Anaconda é gerenciador que permite manter instalações paralelas e independentes do Python. Seu ambiente "base" vem com diversos pacotes para data science, dentre eles o scikit-learn.
+> O [Anaconda](https://www.anaconda.com) é uma distribuição Python que permite manter múltiplas versões do interpretador, cada uma com seus próprios pacotes. Seu ambiente base vem por padrão com diversos pacotes para data science, incluindo o scikit-learn.
 
-Caso a biblioteca scikit-learn não esteja instalada no Python, podemos usar o reticulate para fazer isso.
+Caso o pacote scikit-learn não esteja instalada no Python, podemos usar o reticulate para fazer isso.
 
 ```{r}
-#conda_install("base", "sklearn")
-#py_install("sklearn")
+# conda_install("base", "sklearn")
+# py_install("sklearn")
 ```
 
 ### Exemplo
 
-A própria biblioteca carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes.
+A própria biblioteca scikit carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes.
 
 Para exemplificar o uso do sklearn no R, utilizaremos o conjunto *breast cancer winconsin*.
 
@@ -70,23 +70,21 @@ X, y = load_breast_cancer(return_X_y=True)
 
 #### Divisão em treino e teste
 
-No contexto de machine learning, é uma prática rotineira separar os dados em treino e teste, geralmente, numa proporção de 80/20. Isso ajuda a avaliar a capacidade de generalização do modelo para além dos dados de ajuste, e pode ser feito do seguinte modo no sklearn:
+No contexto de machine learning, é uma prática rotineira separar os dados em treino e teste, geralmente, numa proporção de 4 para 1. Isso ajuda a avaliar a capacidade de generalização do modelo para além dos dados de ajuste, e pode ser feito do seguinte modo no sklearn:
 
 ```{python}
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X , y, train_size=0.8, random_state=42)
 ```
 
-> O parâmetro `random_state` fixa a semente de geração de números aleatórios, permitindo posteriormente reproduzir os resultados.
+> O parâmetro `random_state` fixa a semente de geração de números aleatórios para a reprodução de resultados.
 
 #### Pipeline
 
 Um pipeline lembra o pipe `%>%` do R, e descreve uma sequência de transformações seguida de um modelo. É muito útil para unificar e simplificar os processos de pré-processamento, estimação e ajuste de hiperparâmetros, bem como para fazer previsões.
 
-> **(Vazamento de dados)**. Garante que os mesmos dados, `X_train` e `y_train`, sejam utilizados em todas as etapas.
-
-O modelo de classificação consistirá de uma padronização de média e variância seguida de uma decomposição em componentes principais e enfim um modelo *support vector classifier*.
+O modelo de classificação consistirá de uma padronização de média e variância das variáveis seguida de uma decomposição em componentes principais e por fim um *support vector classifier*.
 
 ```{python}
 from sklearn.pipeline import Pipeline
@@ -101,14 +99,20 @@ model = Pipeline([
 ])
 ```
 
-> Tanto o parâmetro `n_components` do PCA quanto o `C` do LinearSVC são hiperparâmetros desse modelo, e podem ser ajustados utilizando os métodos do `GridSearchCV()`, `RandomSearchCV()` etc do módulo `model_selection` sobre o pipeline.
+> Tanto o parâmetro `n_components` do PCA quanto o `C` do LinearSVC são hiperparâmetros desse modelo `model`, e podem ser ajustados utilizando os métodos do `GridSearchCV()`, `RandomSearchCV()` etc do módulo `model_selection` sobre o pipeline.
 
-Enfim, o ajuste do modelo utilizando os dados de **treino** e a verificação da acurácia no conjunto de **teste**.
+Segue o ajuste do modelo utilizando os dados de **treino**.
+
+```{python}
+model.fit(X_train, y_train)
+```
+
+> **(Vazamento de dados)**. Veja que o pipeline ajuda a reforçar o uso dos dados de **treino** em todas as etapas de construção do modelo.
+
+Agora, a verificação da acurácia no conjunto de **teste**.
 
 ```{python}
 from sklearn.metrics import accuracy_score
-
-model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 print("Precisão:", accuracy_score(y_test, y_pred))
@@ -126,13 +130,7 @@ svc_coefs = model["svc"].coef_
 py$svc_coefs
 ```
 
-```{python}
-import matplotlib.pyplot as plt
-
-plt.scatter(X[:, 0], X[:, 1])
-plt.plot()
-```
-
 ## Materiais
 
-1.  Para mais informações sobre a biblioteca scikit-learn, veja a [documentação](https://scikit-learn.org/stable/user_guide.html).
+1.  Para mais informações sobre a biblioteca scikit-learn, veja a sua [página](https://scikit-learn.org/stable/getting_started.html) na web e [documentação](https://scikit-learn.org/stable/user_guide.html).
+2.  [GÉRON, Aurelin (2019)](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow.
