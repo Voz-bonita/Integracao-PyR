@@ -52,9 +52,9 @@ editor: visual
 
 ::: {.column width="25%"}
 
-<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px;">
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px; margin-bottom:75px;">
 
-<img src="./src/icons/Quarto.png" style="width:192px;height:192px;">
+<img src="./src/icons/Quarto.png">
 
 :::
 
