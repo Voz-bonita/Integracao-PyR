@@ -19,7 +19,56 @@ knitr:
 editor: visual
 ---
 
+<style>
+.row {
+  display: flex;
+}
 
+.column {
+  flex: 50%;
+}
+</style>
+
+<section>
+  <h1 style="text-align: center">Tech Stack</h1>
+  
+:::: {.columns}
+
+::: {.column width="25%"}
+
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;">
+
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px;">
+
+:::
+
+::: {.column width="25%"}
+
+<img src="https://spark.apache.org/images/spark-logo-rev.svg" style="width:192px;height:192px;">
+
+<img src="https://github.com/rstudio/reticulate/raw/main/man/figures/reticulated_python.png" style="width:200px;height:140px;">
+
+
+
+:::
+
+::: {.column width="25%"}
+
+<img src="https://docs.jupyter.org/en/latest/_static/jupyter.svg" style="width:192px;height:192px;">
+
+<img src="./src/icons/Quarto.png" style="width:153px;height:185px;">
+
+:::
+
+::: {.column width="25%"}
+
+<img src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg" style="width:192px;height:192px;">
+
+:::
+
+::::
+  
+</section>
 
 <section class="title-slide">
     <h1 style="text-align: center">Por que Python?</h1>
