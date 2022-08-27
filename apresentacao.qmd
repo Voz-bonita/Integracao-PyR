@@ -36,31 +36,31 @@ editor: visual
 
 ::: {.column width="25%"}
 
-<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;">
-
-<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px;">
-
-:::
-
-::: {.column width="25%"}
+<img src="https://raw.githubusercontent.com/github/explore/180320cffc25f4ed1bbdfd33d4db3a66eeeeb358/topics/cpp/cpp.png" style="width:192px;height:192px;">
 
 <img src="https://spark.apache.org/images/spark-logo-rev.svg" style="width:192px;height:192px;">
 
-<img src="https://github.com/rstudio/reticulate/raw/main/man/figures/reticulated_python.png" style="width:200px;height:140px;">
-
-
-
 :::
 
 ::: {.column width="25%"}
+
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;">
 
 <img src="https://docs.jupyter.org/en/latest/_static/jupyter.svg" style="width:192px;height:192px;">
 
-<img src="./src/icons/Quarto.png" style="width:153px;height:185px;">
+:::
+
+::: {.column width="25%"}
+
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px;">
+
+<img src="./src/icons/Quarto.png" style="width:192px;height:192px;">
 
 :::
 
 ::: {.column width="25%"}
+
+<img src="https://github.com/rstudio/reticulate/raw/main/man/figures/reticulated_python.png" style="width:200px;height:140px; margin-bottom:52px">
 
 <img src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg" style="width:192px;height:192px;">
 
