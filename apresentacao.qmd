@@ -122,7 +122,3 @@ from tensorflow import keras
 <section data-background-iframe="http://localhost:8000/equivalencias.html">
 
 </section>
-
-<section>
-teste
-</section>
