@@ -19,16 +19,6 @@ knitr:
 editor: visual
 ---
 
-<style>
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 50%;
-}
-</style>
-
 <section>
   <h1 style="text-align: center">Tech Stack</h1>
   
@@ -123,5 +113,16 @@ from tensorflow import keras
 </section>
 
 <section>
-<h2>Reticulate<h2>
+<h2>Reticulate</h2>
+</section>
+
+
+<!-- python -m http.server -->
+<!-- jupyter nbconvert --to html equivalencias.ipynb -->
+<section data-background-iframe="http://localhost:8000/equivalencias.html">
+
+</section>
+
+<section>
+teste
 </section>
