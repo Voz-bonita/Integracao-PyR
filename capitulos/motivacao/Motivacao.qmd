@@ -1,0 +1,320 @@
+---
+title: "Integração R e Python"
+subtitle: "um caso de amor (e ódio)"
+author: 
+  - Carolina Musso
+  - José Vitor
+  - Pedro Henrique
+  - Rafael Lira
+  - Vítor de Sousa
+format:
+  revealjs:
+    incremental: true 
+    theme: dark
+    code-block-border-left: "#31BAE9"
+    code-block-bg: "#011627"
+    code-overflow: wrap
+    highlight-style: dracula
+    transition: fade
+    self-contained: true
+knitr:
+  opts_chunk:
+    echo: true
+    warnings: false
+editor: visual
+---
+
+```{=html}
+<style>
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+</style>
+```
+<section>
+
+<h1 style="text-align: center">
+
+Tech Stack
+
+</h1>
+
+::: columns
+::: {.column width="25%"}
+<img src="https://raw.githubusercontent.com/github/explore/180320cffc25f4ed1bbdfd33d4db3a66eeeeb358/topics/cpp/cpp.png" style="width:192px;height:192px;"/>
+
+<img src="https://spark.apache.org/images/spark-logo-rev.svg" style="width:192px;height:192px;"/>
+:::
+
+::: {.column width="25%"}
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;"/>
+
+<img src="https://docs.jupyter.org/en/latest/_static/jupyter.svg" style="width:192px;height:192px;"/>
+:::
+
+::: {.column width="25%"}
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" style="width:192px;height:192px; margin-bottom:75px;"/>
+
+![](img/quarto_logo.png)
+:::
+
+::: {.column width="25%"}
+<img src="https://github.com/rstudio/reticulate/raw/main/man/figures/reticulated_python.png" style="width:200px;height:140px; margin-bottom:52px"/>
+
+<img src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg" style="width:192px;height:192px;"/>
+:::
+:::
+
+</section>
+
+<section>
+
+<h1 style="text-align: center">
+
+Estrutura da apresentação
+
+</h1>
+
+-   Motivação
+
+-   Integração
+
+-   Equivalência
+
+-   Linguagem python
+
+-   skit-learn
+
+</section>
+
+<section class="title-slide">
+
+<h1 style="text-align: center">
+
+R ou Python?
+
+</h1>
+
+</section>
+
+<section>
+
+<h2>Uma briga (*quase*) superada ...</h2>
+
+::: columns
+::: {.column width="50%"}
+![](img/Rlogo.png){fig-alt="font-size:24px" fig-align="left" width="129"}
+
+::: {style="font-size:34px"}
+-   Criado / Lançado em [1993/1995](https://www.stat.auckland.ac.nz/~ihaka/downloads/Interface98.pdf "R: Past and Future History") e mantido pela [R-Foundation](https://www.r-project.org/foundation/ "R Foundation")
+
+-   Estatísticos da Universidade de Aukland, NZ
+
+-   [Robert Gentleman](https://computationalbiomed.hms.harvard.edu/about/people/robert-gentleman-phd/), [Ross Ihaka](https://www.stat.auckland.ac.nz/~ihaka/), S Language
+:::
+:::
+
+::: {.column width="50%"}
+![](img/python2.png){width="178"}
+
+::: {style="font-size:34px"}
+-   Criado/Lançado em [1989/1991](https://python-history.blogspot.com/2009/01/brief-timeline-of-python.html), mantido pela [Python Sftware Foundation](https://www.python.org/psf/about/ "PSF")
+
+-   Por pelo programador holandês [Guido van Rossum](https://gvanrossum.github.io "Guido van Rossum")
+
+-   Que aparentemente gostava muito de [Monty Python](https://pt.wikipedia.org/wiki/Monty_Python)
+:::
+:::
+:::
+
+</section>
+
+<section>
+
+<h2> Uma briga (quase) superada ... </h2>
+
+[![**Qual vocês acham que é o R?** ](img/gif-r-vs-python.gif){fig-align="center" width="533"}](https://medium.com/built-to-adapt/8-simple-guidelines-for-data-projects-859a1a738ffc)
+
+</section>
+
+<section>
+
+<h2> Uma briga (quase) superada ...</h2>
+
+::: columns
+::: {.column width="50%"}
+[![](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2015.46.35.png){fig-align="left" width="658"}](https://s3.amazonaws.com/assets.datacamp.com/email/other/Python+vs+R.pdf)
+:::
+
+::: {.column width="50%"}
+[![](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2015.45.36.png){fig-align="left" width="728"}](https://s3.amazonaws.com/assets.datacamp.com/email/other/Python+vs+R.pdf)
+:::
+:::
+
+</section>
+
+<section>
+
+<h2>Hadley Wichman</h2>
+
+[![Cientista chefe na RStidio (futura Posit)](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2015.53.15.png){fig-align="center" width="393"}](https://qz.com/1661487/hadley-wickham-on-the-future-of-r-python-and-the-tidyverse/)
+
+"*Não é uma batalha \[...\] use o que te faz feliz!*" , [2019](https://qz.com/1661487/hadley-wickham-on-the-future-of-r-python-and-the-tidyverse/)
+
+</section>
+
+<section>
+
+<h3>Mas olha só...</h3>
+
+[![Survey do Stack overflow](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2016.21.01.png){fig-align="center" width="737"}](https://insights.stackoverflow.com/survey/2021#overview)
+
+</section>
+
+<section>
+
+<h3>Diferenças, vantagens, desvantagens....</h3>
+
+::: columns
+::: {.column width="50%"}
+::: {style="color:#2596be"}
+[**R**]{.underline}
+:::
+
+::: {style="font-size:30px"}
+-   **Usuários:** Acadêmicos, estatísticos, biólogos, economistas ...
+
+-   Modelos em poucas linhas, possibilidade de escrever de várias formas.
+
+-   Estatística e visualização (ggplot2!)
+
+-   CRAN, GitHub: + pacotes, + fáceis de instalar e mais documentados.
+:::
+:::
+
+::: {.column width="50%"}
+::: {style="color: green"}
+[**Python**]{.underline}
+:::
+
+::: {style="font-size: 30px"}
+-   **Usuários:** Cient. computação, Eng. software ...
+
+-   Sensível a indentação.
+
+-   ETL/ML workflows e ambientes de produção escaláveis
+
+-   Pacotes/dependências mais "chatinhos"
+:::
+:::
+:::
+
+</section>
+
+<section>
+
+<h2> E porque integrar R/python afinal? </h2>
+
+### 
+
+**Argumento 1:** Uma pode ser melhor que a outra para um determinado problema.
+
+::: columns
+::: {.column width="50%"}
+::: {style="color:green"}
+[Python melhor:]{.underline}
+:::
+
+[![Desde 2012: Engloba todos os requisitos](img/scrapy.png){width="138"}](https://scrapy.org)
+:::
+
+::: {.column width="50%"}
+<div>
+
+::: {style="color: white"}
+R veio depois com:
+
+-   ![](img/rvest.png){width="89"}: 2012, não permite crawling
+
+-   [RCrawler](https://www.softxjournal.com/article/S2352-7110(17)30011-0/fulltext "RCrawler"): 2017
+:::
+
+</div>
+:::
+:::
+
+::: incremental
+-   Resumindo: O foco é resolver o [**problema**]{.underline}. Leia o [post](https://medium.com/built-to-adapt/8-simple-guidelines-for-data-projects-859a1a738ffc "Medium").
+:::
+
+</section>
+
+<section>
+
+<h2> E porque integrar R/python afinal? </h2>
+
+-   **Argumento 1:** Uma pode ser melhor que a outra para um determinado problema.
+
+    ::: columns
+    ::: {.column width="50%"}
+    ::: {style="color:#2596be"}
+    [R melhor:]{.underline}
+    :::
+
+    -   [![](img/shiny.jpeg){width="140"}](https://shiny.rstudio.com) Web apps
+
+    -   [![](img/rmarkdown.png){width="140"}](https://rmarkdown.rstudio.com)  + pagedown, [blogdown](https://beatrizmilz.com), [bookdown](https://epirhandbook.com/en/)...
+    :::
+
+    ::: {.column width="50%"}
+    ::: {style="color: #2596be"}
+    RStudio recentemente:
+    :::
+
+    -   [Shiny for Python](https://shiny.rstudio.com/py/)
+
+    -   [![](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2020.04.24.png){width="184"}](https://quarto.org/docs/tools/rstudio.html) Quarto
+    :::
+    :::
+
+    </section>
+
+    <section>
+
+-   <h2> E porque integrar R/python afinal? </h2>
+
+-   **Argumento 2:** A sua equipe pode ter pessoas de diferentes linguagens.
+
+![](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2015.45.57.png){width="660"}
+
+*(ou uma mistura dos dois!)*
+
+</section>
+
+<section>
+
+<h3>Exemplos</h3>
+
+A preparação dessa apresentação
+
+[![Apresentação rstudio::conf(2022)](img/Captura%20de%20Tela%202022-08-28%20a%CC%80s%2020.10.53.png)](https://github.com/melissavanbussel/rstudio-conf-2022/blob/main/VanBussel_Slides.pdf)
+
+</section>
+
+<section>
+
+<h3>Basicamente ...</h3>
+
+-   **A RStudio correu atrás**
+
+-   [RStudio: A Single Home for R and Python](RStudio: A Single Home for R & Python "RStudio: A Single Home for R & Python")
+
+-   pacote reticulate
+
+-   Ah, essa parte da apresentação foi bastante inspirada [nessa apresentação](https://beatrizmilz.github.io/python-brasil-2021-reticulate/#18 "Bea Milz") da Bea Milz
+
+</section>
