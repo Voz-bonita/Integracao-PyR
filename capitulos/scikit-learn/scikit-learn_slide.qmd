@@ -82,13 +82,12 @@ editor: visual
 
 ## Preparação
 
--   O primeiro passo é carregar o pacote `reticulate`. Em seguida, indica-se a versão Python a ser usada; nesse caso, o ambiente "base" da distribuição Anaconda.
+-   O primeiro passo é carregar o pacote `reticulate` e indicar onde serão executados os códigos Python; nesse caso, no ambiente virtual "venv".
 
 ::: fragment
 ```{r include=TRUE, warnings=FALSE}
 library(reticulate)
-use_condaenv("base")
-# use_python("C:/Users/pedro/anaconda3")
+use_virtualenv("venv")
 ```
 :::
 
@@ -102,12 +101,13 @@ use_condaenv("base")
 
 <!-- O Anaconda é uma distribuição Python que permite manter múltiplas versões do interpretador, cada uma com seus próprios pacotes. Seu ambiente base vem por padrão com diversos pacotes para data science, incluindo o scikit-learn. -->
 
--   Caso o pacote scikit-learn não esteja instalado no Python,
+-   Caso precise criar esse ambiente virtual, primeiro execute:
 
 ::: fragment
 ```{r eval=FALSE}
-conda_install("base", "sklearn")
-# py_install("sklearn")
+use_python("C:/Users/pedro/anaconda3")
+virtualenv_create("venv",
+                  packages=c("scikit-learn"))
 ```
 :::
 
