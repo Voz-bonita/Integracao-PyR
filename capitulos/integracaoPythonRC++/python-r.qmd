@@ -16,7 +16,12 @@ knitr:
     echo: true
     warnings: false
 editor: visual
+
 ---
+```{r}
+if (!require("pacman")) install.packages("pacman")
+p_load(reticulate)
+```
 
 <section class="title-slide">
     <h1 style="text-align: center">Python no R</h1>
@@ -32,6 +37,28 @@ editor: visual
 - Execução de scripts do Python interagindo com a sessão do R; 
 - Tradução entre objetos do R e do Python (como entre data frames do R e do Pandas);
 ::::
+::: {.fragment}
+```{r}
+library(reticulate)
+use_condaenv("base")
+
+py_install("numpy")
+
+> repl_python()
+
+```
+```{python}
+import pandas as pd
+import numpy as np
+py_arr = np.array([1,2,3,4,5])
+for item in py_arr:
+  print(item, end=", ")
+```
+```{r}
+r_arr <- as.vector(py$py_arr)
+print(r_arr)
+```
+::: 
 ::::::
 </section>
 
