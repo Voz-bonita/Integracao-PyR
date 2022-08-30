@@ -1,5 +1,5 @@
 ---
-title: "Integração Python em R e R em Python"
+title: "Integração R e Python"
 ---
 ```{r echo = FALSE}
 if (!require("pacman")) install.packages("pacman")
