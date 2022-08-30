@@ -1,0 +1,9 @@
+---
+title: "Equivalencias"
+---
+
+<!-- python -m http.server -->
+<!-- jupyter nbconvert --to html equivalencias.ipynb -->
+<section data-background-iframe="http://localhost:8000/equivalencias.html">
+
+</section>
