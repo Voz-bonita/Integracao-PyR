@@ -57,7 +57,7 @@ editor: visual
 ## Modelos
 
 -   **Regressão:** linear, ridge, LASSO, SVR etc;
--   **Classificação:** regr. logística, árvore de decisão, SVM, naive Bayes, LDA/QDA etc;
+-   **Classificação:** regressão logística, árvore de decisão, SVM, naive Bayes, LDA/QDA etc;
 -   **Clusterização:** K-Means, misturas gaussianas etc;
 -   **Outros:**
     -   Estimação de densidades de probabilidade;
@@ -82,54 +82,65 @@ editor: visual
 
 ## Preparação
 
-O primeiro passo é carregar o pacote `reticulate`. Em seguida, definimos a instalação Python a ser usada; nesse caso, o ambiente "base" do Anaconda.
+-   O primeiro passo é carregar o pacote `reticulate`. Em seguida, indica-se a versão Python a ser usada; nesse caso, o ambiente "base" da distribuição Anaconda.
 
+::: fragment
 ```{r include=TRUE, warnings=FALSE}
 library(reticulate)
 use_condaenv("base")
 # use_python("C:/Users/pedro/anaconda3")
 ```
+:::
 
+::: fragment
 ```{r eval=FALSE, include=FALSE}
 # packages <- read.csv("../../requirements.txt")
 # use_python("C:/Users/pedro/anaconda3")
 # virtualenv_create("myenv", )
 ```
+:::
 
 <!-- O Anaconda é uma distribuição Python que permite manter múltiplas versões do interpretador, cada uma com seus próprios pacotes. Seu ambiente base vem por padrão com diversos pacotes para data science, incluindo o scikit-learn. -->
 
-Caso o pacote scikit-learn não esteja instalado no Python, podemos usar o reticulate para fazer isso.
+-   Caso o pacote scikit-learn não esteja instalado no Python,
 
-```{r}
-# conda_install("base", "sklearn")
+::: fragment
+```{r eval=FALSE}
+conda_install("base", "sklearn")
 # py_install("sklearn")
 ```
+:::
 
-## Exemplo
+## Exemplo: classificação de tumores
 
 <!-- A própria biblioteca scikit carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes. -->
 
-Para exemplificar o uso do sklearn, utilizaremos um data frame carregado dentro no R, que será passado para o ambiente Python como um data frame `pandas`.
+O data frame carregado dentro no R é passado para o ambiente Python como um data frame `pandas`.
 
 ```{r output=FALSE}
 library(readr)
 breast_cancer = read_csv("breast_cancer.csv")
 ```
 
-Já no Python, acessamos esse data frame através do objeto `r`.
+-   No Python, esse data frame fica contido no objeto `r`.
 
+::: fragment
 ```{python}
 import pandas as pd
 print(r.breast_cancer)
 ```
+:::
 
 ## 
 
+No scikit-learn, para ajustar um modelo é preciso separar as colunas de covariáveis, representadas pela matriz `X`, da variável resposta `y`.
+
+::: fragment
 ```{python}
-# Covariáveis e variável resposta
 X = r.breast_cancer.drop("y", axis=1)
 y = r.breast_cancer["y"] # 0 = maligno, 1 = benigno
 ```
+:::
 
 ## Divisão em treino e teste
 
@@ -153,9 +164,9 @@ from sklearn.decomposition import PCA
 from sklearn.svm import LinearSVC
 
 model = Pipeline([
-  ("scaler", StandardScaler()),
-  ("pca", PCA(n_components=5)),
-  ("svc", LinearSVC(C=8.71, dual=False))
+  ("scaler", StandardScaler()),          # Padronização
+  ("pca", PCA(n_components=5)),          # Componentes principais
+  ("svc", LinearSVC(C=8.71, dual=False)) # Support Vector Machine
 ])
 ```
 
@@ -165,59 +176,75 @@ model = Pipeline([
 
     -   Unifica e simplifica as etapas de pré-processamento, estimação e ajuste de hiperparâmetros, e previsões.
 
+## 
+
 -   <div>
 
-    > Tanto `n_components` no PCA quanto o `C` no LinearSVC são hiperparâmetros desse modelo, e podem ser ajustados utilizando métodos de validação cruzada sobre o pipeline.
+    > Os hiperparâmetros `n_components` e `C` definidos podem ser ajustados utilizando métodos de validação cruzada (Grid Search, Random Search etc.) sobre o pipeline.
 
     </div>
 
-## 
+-   Com os hiperparâmetros definidos, ajusta-se o modelo aos dados de **treino**.
 
-Para ajustar o modelo, utilizamos os dados de **treino**.
-
+::: fragment
 ```{python output=FALSE}
 model.fit(X_train, y_train)
 ```
+:::
 
 -   <div>
 
-    > **(Vazamento de dados)**. Veja que o pipeline ajuda a reforçar o uso de apenas os dados de **treino** para o ajuste do modelo.
+    > **(Vazamento de dados)**. O pipeline ajuda a reforçar o uso de apenas os dados de **treino** para o ajuste.
 
     </div>
 
-Agora, a verificação da qualidade das previsões por meio da acurácia no conjunto de **teste**.
+-   Agora, a verificação da qualidade das previsões por meio da acurácia no conjunto de **teste**.
 
+::: fragment
 ```{python}
 from sklearn.metrics import accuracy_score
 
 y_pred = model.predict(X_test)
 print("Precisão:", accuracy_score(y_test, y_pred))
 ```
+:::
 
 ## Exportando os resultados para o R
 
-Podemos enfim trazer alguma parte de interesse do resultado para o R, por exemplo, as previsões do modelo.
+Podemos enfim armazenar alguma parte de interesse do resultado para trazer para o R, por exemplo, as previsões do modelo.
 
+::: fragment
 ```{python}
 y_pred = model.predict(X)
 ```
+:::
+
+-   De volta ao R, o objeto `y_pred` pode ser acessado através da lista `py`.
+
+::: fragment
+```{r eval=FALSE}
+library(ggplot2)
+breast_cancer$y_pred <- py$y_pred
+qplot(x=y_pred, y=y, data=breast_cancer, geom="jitter")
+```
+:::
 
 ## 
 
-De volta ao R, o objeto `y_pred` pode ser acessado através da lista `py`.
-
 ```{r fig.align='center'}
 library(ggplot2)
-
 breast_cancer$y_pred <- py$y_pred
-
-ggplot(data=breast_cancer, aes(x=y_pred, y=y))+
-  geom_jitter()
+qplot(x=y_pred, y=y, data=breast_cancer, geom="jitter")
 ```
 
 # Materiais
 
-1.  Para mais informações sobre a biblioteca scikit-learn, veja sua [página](https://scikit-learn.org/stable/getting_started.html) na web e o [guia de usuário](https://scikit-learn.org/stable/user_guide.html);
+1.  Para mais informações sobre a biblioteca scikit-learn, veja sua [página na web](https://scikit-learn.org/stable/getting_started.html) e o [guia de usuário](https://scikit-learn.org/stable/user_guide.html);
+
 2.  [Como Usar Pipelines no Scikit-Learn - João Paulo Nogueira](https://medium.com/data-hackers/como-usar-pipelines-no-scikit-learn-1398a4cc6ae9);
+
 3.  [Cross Validation - scikit-learn](https://scikit-learn.org/stable/modules/cross_validation.html);
-4.  [GÉRON, Aurélien (2019)](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow.
+
+4.  [GÉRON, Aurélien (2019)](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow;
+
+5.  [Translating between tidymodels and scikit-learn - Kelly Bodwin](https://www.kelly-bodwin.com/talks/rsconf22/).
