@@ -18,7 +18,7 @@ Estrutura da apresentação
 
 -   Linguagem python
 
--   skit-learn
+-   Scikit-learn
 
 </section>
 
