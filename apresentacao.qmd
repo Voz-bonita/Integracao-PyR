@@ -63,6 +63,6 @@ Tech Stack
 
 {{< include capitulos/motivacao/Motivacao.qmd >}}
 
-{{< include capitulos/integracaoPythonRC++/python-r.qmd >}}
+{{< include capitulos/integracaoPythonRC/python-r.qmd >}}
 
 {{< include capitulos/equivalencias/equivalencias.qmd >}}
