@@ -1,21 +1,5 @@
 ---
-title: "Machine Learning com scikit-learn no R"
-author: "Pedro Lima"
-format:
-  revealjs:
-    incremental: true 
-    theme: dark
-    code-block-border-left: "#31BAE9"
-    code-block-bg: "#011627"
-    code-overflow: wrap
-    highlight-style: dracula
-    transition: fade
-    self-contained: true
-knitr:
-  opts_chunk:
-    echo: true
-    warnings: false
-editor: visual
+title: "Integração R e Python"
 ---
 
 <!-- https://quarto.org/docs/presentations/revealjs/ -->
@@ -87,7 +71,7 @@ editor: visual
 ::: fragment
 ```{r include=TRUE, warnings=FALSE}
 library(reticulate)
-use_virtualenv("venv")
+use_virtualenv("./venv", required = TRUE)
 ```
 :::
 
@@ -105,7 +89,7 @@ use_virtualenv("venv")
 
 ::: fragment
 ```{r eval=FALSE}
-use_python("C:/Users/pedro/anaconda3")
+use_python("C:/Users/user/anaconda3")
 virtualenv_create("venv",
                   packages=c("scikit-learn"))
 ```
@@ -119,7 +103,7 @@ O data frame carregado dentro no R é passado para o ambiente Python como um dat
 
 ```{r output=FALSE}
 library(readr)
-breast_cancer = read_csv("breast_cancer.csv")
+breast_cancer = read_csv("./capitulos/scikit-learn/breast_cancer.csv")
 ```
 
 -   No Python, esse data frame fica contido no objeto `r`.
