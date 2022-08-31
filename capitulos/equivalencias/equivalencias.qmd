@@ -99,7 +99,7 @@ title: "Integração R e Python"
 </section>
 
 <!-- python -m http.server -->
-<!-- jupyter nbconvert --to html equivalencias.ipynb -->
-<section data-background-iframe="http://localhost:8000/equivalencias.html">
+<!-- jupyter nbconvert --to html capitulos/equivalencias/equivalencias.ipynb -->
+<section data-background-iframe="http://localhost:8000/capitulos/equivalencias/equivalencias.html">
 
 </section>
