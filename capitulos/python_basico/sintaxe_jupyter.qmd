@@ -38,7 +38,7 @@ title: "Integração R e Python"
 
 - Já vem com os principais pacotes para ciência de dados.
     - Pandas
-    - Numpy,
+    - Numpy
     - Seaborn
     - Scikit-learn
     - etc.
