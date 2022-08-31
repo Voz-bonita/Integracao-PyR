@@ -1,22 +1,5 @@
 ---
-title: "Integração Python em R e R em Python"
-author: "Rafael Lira"
-format:
-  revealjs:
-    incremental: true 
-    theme: dark
-    code-block-border-left: "#31BAE9"
-    code-block-bg: "#011627"
-    code-overflow: wrap
-    highlight-style: dracula
-    transition: fade
-    self-contained: true
-knitr:
-  opts_chunk:
-    echo: true
-    warnings: false
-editor: visual
-
+title: "Integração R e Python"
 ---
 
 ```{r echo=FALSE}
