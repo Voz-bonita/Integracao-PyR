@@ -15621,7 +15621,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span><span class="p">,</span> <span class="n">Row</span>
@@ -15645,21 +15645,53 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"../Listas/Lista_1/dados/AC-Parte_1.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"t1"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"./House_Rent_Dataset.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">","</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"Aluguel_ds"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+-------------------+---+-----+----+---------------+-----------+--------------------+-------+-----------------+----------------+--------+----------------+
+|          Posted On|BHK| Rent|Size|          Floor|  Area Type|       Area Locality|   City|Furnishing Status|Tenant Preferred|Bathroom|Point of Contact|
++-------------------+---+-----+----+---------------+-----------+--------------------+-------+-----------------+----------------+--------+----------------+
+|2022-05-18 00:00:00|  2|10000|1100|Ground out of 2| Super Area|              Bandel|Kolkata|      Unfurnished|Bachelors/Family|       2|   Contact Owner|
+|2022-05-13 00:00:00|  2|20000| 800|     1 out of 3| Super Area|Phool Bagan, Kank...|Kolkata|   Semi-Furnished|Bachelors/Family|       1|   Contact Owner|
+|2022-05-16 00:00:00|  2|17000|1000|     1 out of 3| Super Area|Salt Lake City Se...|Kolkata|   Semi-Furnished|Bachelors/Family|       1|   Contact Owner|
+|2022-07-04 00:00:00|  2|10000| 800|     1 out of 2| Super Area|         Dumdum Park|Kolkata|      Unfurnished|Bachelors/Family|       1|   Contact Owner|
+|2022-05-09 00:00:00|  2| 7500| 850|     1 out of 2|Carpet Area|       South Dum Dum|Kolkata|      Unfurnished|       Bachelors|       1|   Contact Owner|
++-------------------+---+-----+----+---------------+-----------+--------------------+-------+-----------------+----------------+--------+----------------+
+only showing top 5 rows
+
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -15673,7 +15705,266 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">spark</span>
+    <span class="o">.</span><span class="n">sql</span><span class="p">(</span>
+        <span class="sd">"""</span>
+<span class="sd">        SELECT BHK, Floor, Size, Bathroom, City, Rent</span>
+<span class="sd">        FROM ALuguel_ds</span>
+<span class="sd">        WHERE City="Delhi" </span>
+<span class="sd">            AND Bathroom=2 </span>
+<span class="sd">            AND Rent &lt; 10000</span>
+<span class="sd">        LIMIT 5</span>
+<span class="sd">        """</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+---+---------------+----+--------+-----+----+
+|BHK|          Floor|Size|Bathroom| City|Rent|
++---+---------------+----+--------+-----+----+
+|  2|     4 out of 4| 445|       2|Delhi|9000|
+|  1|     2 out of 4| 600|       2|Delhi|9500|
+|  2|     1 out of 3| 145|       2|Delhi|9000|
+|  2|     1 out of 1| 380|       2|Delhi|5500|
+|  2|Ground out of 3| 100|       2|Delhi|8000|
++---+---------------+----+--------+-----+----+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Regress%C3%A3o-Log%C3%ADstica">Regress&#227;o Log&#237;stica<a class="anchor-link" href="#Regress%C3%A3o-Log%C3%ADstica">&#182;</a></h2>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">VectorAssembler</span><span class="p">,</span> <span class="n">StringIndexer</span>
+
+<span class="n">cidade</span> <span class="o">=</span> <span class="n">StringIndexer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">"City"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"City_lab"</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">"BHK"</span><span class="p">,</span> <span class="s2">"Bathroom"</span><span class="p">,</span> <span class="s2">"Rent"</span><span class="p">,</span> <span class="s2">"Size"</span><span class="p">]</span> <span class="p">,</span><span class="n">outputCol</span><span class="o">=</span><span class="s2">"features"</span><span class="p">)</span>
+
+<span class="n">pipe_seq</span> <span class="o">=</span> <span class="p">[</span><span class="n">cidade</span><span class="p">,</span> <span class="n">features</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span> <span class="o">=</span> <span class="n">pipe_seq</span><span class="p">)</span>
+<span class="n">pipelineModel</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pipelineModel</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">selectedCols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selectedCols</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- Posted On: timestamp (nullable = true)
+ |-- BHK: integer (nullable = true)
+ |-- Rent: integer (nullable = true)
+ |-- Size: integer (nullable = true)
+ |-- Floor: string (nullable = true)
+ |-- Area Type: string (nullable = true)
+ |-- Area Locality: string (nullable = true)
+ |-- City: string (nullable = true)
+ |-- Furnishing Status: string (nullable = true)
+ |-- Tenant Preferred: string (nullable = true)
+ |-- Bathroom: integer (nullable = true)
+ |-- Point of Contact: string (nullable = true)
+ |-- City_lab: double (nullable = false)
+ |-- features: vector (nullable = true)
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">treino</span><span class="p">,</span> <span class="n">teste</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">randomSplit</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2022</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Training Dataset Count: </span><span class="si">{</span><span class="n">treino</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test Dataset Count: </span><span class="si">{</span><span class="n">teste</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Training Dataset Count: 3791
+Test Dataset Count: 955
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.classification</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">featuresCol</span> <span class="o">=</span> <span class="s1">'features'</span><span class="p">,</span> <span class="n">labelCol</span> <span class="o">=</span> <span class="s1">'City_lab'</span><span class="p">,</span> <span class="n">maxIter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">lrModel</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">treino</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">lrModel</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">teste</span><span class="p">)</span>
+<span class="n">predictions</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'Rent'</span><span class="p">,</span> <span class="s1">'Size'</span><span class="p">,</span> <span class="s1">'City'</span><span class="p">,</span> <span class="s1">'rawPrediction'</span><span class="p">,</span> <span class="s1">'prediction'</span><span class="p">,</span> <span class="s1">'probability'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+-----+----+---------+--------------------+----------+--------------------+
+| Rent|Size|     City|       rawPrediction|prediction|         probability|
++-----+----+---------+--------------------+----------+--------------------+
+|15000|1000|  Kolkata|[-1.4336267592778...|       2.0|[0.02912356323592...|
+|36125|1700|  Kolkata|[-3.6200326459441...|       1.0|[0.00240513687576...|
+| 9000| 650|  Kolkata|[-2.1056478854716...|       5.0|[0.01349452047314...|
+|12000|1000|  Kolkata|[-2.6774306687692...|       1.0|[0.00775160105075...|
+|13000|1000|  Kolkata|[0.66560439810214...|       3.0|[0.18409749747501...|
+|18000|1300|  Kolkata|[-1.8482311647371...|       3.0|[0.01654716972550...|
+|20000| 700|    Delhi|[-0.2298528005253...|       2.0|[0.12045942903651...|
+| 7500| 450|    Delhi|[-1.5551454816351...|       5.0|[0.02540588237963...|
+| 9000| 600|  Kolkata|[-1.9484695076333...|       5.0|[0.01623227347951...|
+|30000|1875|Bangalore|[-4.4895189907384...|       1.0|[7.70143515142275...|
++-----+----+---------+--------------------+----------+--------------------+
+only showing top 10 rows
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15681,55 +15972,39 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">seg_dose</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">    SELECT * FROM t1</span>
-<span class="s2">    WHERE (</span>
-<span class="s2">        vacina_descricao_dose='2ª Dose' OR</span>
-<span class="s2">        vacina_descricao_dose='2ª Dose Revacinação')</span>
-<span class="s2">    LIMIT 1</span>
-<span class="s2">"""</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">fast_join</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">    SELECT name_health_region as regiao_saude</span>
-<span class="s2">    FROM (</span><span class="si">{</span><span class="n">seg_dose</span><span class="si">}</span><span class="s2">) as seg_dose</span>
-<span class="s2">    LEFT JOIN codigos</span>
-<span class="s2">    ON seg_dose.estabelecimento_municipio_codigo</span>
-<span class="s2">    = codigos.est_mun_codigo</span>
-<span class="s2">"""</span>
-
-<span class="n">qnt_vax</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">    SELECT regiao_saude, COUNT(*) AS N</span>
-<span class="s2">    FROM (</span><span class="si">{</span><span class="n">fast_join</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">    GROUP BY regiao_saude</span>
-<span class="s2">"""</span>
-
-<span class="n">faixa</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">    WITH qntVax AS (</span><span class="si">{</span><span class="n">qnt_vax</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">    SELECT regiao_saude, N,</span>
-<span class="s2">        CASE WHEN N &gt; (</span>
-<span class="s2">            SELECT percentile_approx(N, 0.5) </span>
-<span class="s2">            FROM qntVax)</span>
-<span class="s2">        THEN 'Alto'</span>
-<span class="s2">        ELSE 'Baixo'</span>
-<span class="s2">        END AS Faixa</span>
-<span class="s2">        FROM qntVax</span>
-<span class="s2">"""</span>
-
-<span class="n">bot5</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">    WITH tabFaixa AS (</span><span class="si">{</span><span class="n">faixa</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">    SELECT regiao_saude, N, Faixa </span>
-<span class="s2">    FROM (</span>
-<span class="s2">        SELECT *, dense_rank()</span>
-<span class="s2">        OVER (PARTITION BY Faixa ORDER BY N DESC) as posicao</span>
-<span class="s2">        FROM tabFaixa</span>
-<span class="s2">    )</span>
-<span class="s2">    WHERE posicao &lt;= 5</span>
-<span class="s2">"""</span>
+<span class="n">trainingSummary</span> <span class="o">=</span> <span class="n">lrModel</span><span class="o">.</span><span class="n">summary</span>
+<span class="n">roc</span> <span class="o">=</span> <span class="n">trainingSummary</span>
+<span class="n">roc</span><span class="o">.</span><span class="n">accuracy</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>0.46214719071485094</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
