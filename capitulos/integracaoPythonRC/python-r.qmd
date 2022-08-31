@@ -67,9 +67,9 @@ ls("package:reticulate")
 
 :::{.fragment}
 ```{r}
+use_virtualenv("./venv", required = TRUE)
 # py_install("pandas")
 # py_install("numpy")
-
 pd <- import("pandas", as = "pd", convert = FALSE)
 ```
 :::
@@ -94,6 +94,7 @@ array <- py$array
 class(array)
 ```
 :::
+
 </section>
 
 <section>
@@ -101,21 +102,20 @@ class(array)
 :::{.fragment}
 ```{r}
 repl_python(
-  input = "import
+  input = "
   dictionary = {'alpha': 1, 'beta': 2, 'lista': list(range(5))}
   print(dictionary)
   print(type(dictionary))"
 )
 ```
-:::
 
-:::{.fragment}
 ```{r}
 # Convertendo dicionário do Python para lista do R
 (dictionary <- py$dictionary)
 class(dictionary)
 ```
 :::
+
 </section>
 
 
