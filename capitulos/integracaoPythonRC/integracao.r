@@ -7,6 +7,7 @@ p_load(reticulate)
 ls("package:reticulate")
 
 # Fazendo a instalação dos pacotes do Python através do R #
+use_virtualenv("./venv", required = TRUE)
 # py_install("pandas")
 # py_install("numpy")
 
