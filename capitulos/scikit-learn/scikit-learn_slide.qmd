@@ -2,6 +2,8 @@
 title: "Integração R e Python"
 ---
 
+# Machine Learning com scikit-learn no R
+
 <!-- https://quarto.org/docs/presentations/revealjs/ -->
 
 <!-- https://github.com/rstudio/revealjs -->
@@ -10,7 +12,9 @@ title: "Integração R e Python"
 
 <!-- https://beatrizmilz.github.io/python-brasil-2021-reticulate -->
 
-# Scikit-learn
+## Scikit-learn
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1200px-Scikit_learn_logo_small.svg.png){fig-align="center" width="336"}
 
 -   Popular biblioteca de machine learning para Python;
 
@@ -19,8 +23,6 @@ title: "Integração R e Python"
 -   Consistente, eficiente e de fácil utilização;
 
 -   Excelente documentação, repleta de exemplos e tutoriais.
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1200px-Scikit_learn_logo_small.svg.png){fig-align="center" width="336"}
 
 # Ferramentas do scikit-learn
 
@@ -69,21 +71,18 @@ title: "Integração R e Python"
 -   O primeiro passo é carregar o pacote `reticulate` e indicar onde serão executados os códigos Python; nesse caso, no ambiente virtual "venv".
 
 ::: fragment
-```{r include=TRUE, warnings=FALSE}
+```{r include=FALSE, eval=TRUE, output=FALSE}
 library(reticulate)
-use_virtualenv("./venv", required = TRUE)
+use_virtualenv("./venv", required=TRUE)
 ```
 :::
 
 ::: fragment
-```{r eval=FALSE, include=FALSE}
-# packages <- read.csv("../../requirements.txt")
-# use_python("C:/Users/pedro/anaconda3")
-# virtualenv_create("myenv", )
+```{r include=TRUE, eval=FALSE, warnings=FALSE}
+library(reticulate)
+use_virtualenv("venv", required=TRUE)
 ```
 :::
-
-<!-- O Anaconda é uma distribuição Python que permite manter múltiplas versões do interpretador, cada uma com seus próprios pacotes. Seu ambiente base vem por padrão com diversos pacotes para data science, incluindo o scikit-learn. -->
 
 -   Caso precise criar esse ambiente virtual, primeiro execute:
 
@@ -91,68 +90,77 @@ use_virtualenv("./venv", required = TRUE)
 ```{r eval=FALSE}
 use_python("C:/Users/user/anaconda3")
 virtualenv_create("venv",
-                  packages=c("scikit-learn"))
+                  packages=c("scikit-learn",
+                             "numpy", "pandas"))
 ```
 :::
 
-## Exemplo: classificação de tumores
+## Exemplo: classificação de tumores de mama
 
-<!-- A própria biblioteca scikit carrega alguns conjuntos de dados e métodos de geração de dados simulados para quem quiser treinar ou fazer testes. -->
-
-O data frame carregado dentro no R é passado para o ambiente Python como um data frame `pandas`.
-
-```{r output=FALSE}
+```{r include=FALSE, eval=TRUE, output=FALSE}
 library(readr)
-breast_cancer = read_csv("./capitulos/scikit-learn/breast_cancer.csv")
+breast_cancer <- read_csv("breast_cancer.csv")
 ```
 
--   No Python, esse data frame fica contido no objeto `r`.
-
-::: fragment
-```{python}
-import pandas as pd
-print(r.breast_cancer)
+```{r include=TRUE, eval=TRUE, output=FALSE}
+library(readr)
+breast_cancer <- read_csv("./capitulos/scikit-learn/breast_cancer.csv")
 ```
-:::
+
+```{r}
+head(breast_cancer)
+```
+
+- O objetivo é identificar se um tumor é maligno (câncer de mama) ou benigno.
 
 ## 
 
-No scikit-learn, para ajustar um modelo é preciso separar as colunas de covariáveis, representadas pela matriz `X`, da variável resposta `y`.
+No scikit-learn, para ajustar um modelo é preciso separar covariáveis, representadas pela data frame `X`, e variável resposta `y`.
 
 ::: fragment
-```{python}
-X = r.breast_cancer.drop("y", axis=1)
-y = r.breast_cancer["y"] # 0 = maligno, 1 = benigno
+```{r warning=FALSE}
+library(dplyr)
+X <- select(breast_cancer, -y)
+y <- select(breast_cancer, y) # 0 = maligno, 1 = benigno
 ```
 :::
 
 ## Divisão em treino e teste
 
-No contexto de machine learning, é rotineiro separar uma parte dos dados para testar a capacidade de um modelo, geralmente, 20% das observações. Isso pode ser feito do seguinte modo no sklearn:
+- No contexto de machine learning, é rotineiro separar uma parte dos dados para testar a capacidade de um modelo, geralmente, 20% das observações. Isso pode ser feito do seguinte modo no sklearn:
 
-```{python}
-from sklearn.model_selection import train_test_split
+::: fragment
+```{r}
+model_sel <- import("sklearn.model_selection")
 
-X_train, X_test, y_train, y_test = train_test_split(
-  X, y, test_size=0.20, random_state=42)
+py_set_seed(42)
+split <- model_sel$train_test_split(X, y, test_size=0.20)
+
+X_train <- split[[1]]; X_test <- split[[2]]
+y_train <- split[[3]]; y_test <- split[[4]]
 ```
+:::
 
-> O parâmetro `random_state` fixa a semente de geração de números aleatórios para a reprodução de resultados.
+> A função `py_set_seed` fixa a semente dos geradores de números aleatórios do Python para a reprodução de resultados.
 
-## O modelo
+## O modelo de classificação
 
-```{python}
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.svm import LinearSVC
+- Um possível modelo consiste na padronização das variáveis, seguida da retenção dos cinco componentes principais de maior variação e sobre eles um Support Vector Machine.
 
-model = Pipeline([
-  ("scaler", StandardScaler()),          # Padronização
-  ("pca", PCA(n_components=5)),          # Componentes principais
-  ("svc", LinearSVC(C=8.71, dual=False)) # Support Vector Machine
-])
+::: fragment
+```{r}
+pipe <- import("sklearn.pipeline")
+preproc <- import("sklearn.preprocessing")
+decomp <- import("sklearn.decomposition")
+svm <- import("sklearn.svm")
+
+model <- pipe$make_pipeline(
+  preproc$StandardScaler(),         # Padronização
+  decomp$PCA(n_components=5L),      # Componentes principais
+  svm$LinearSVC(C=8.71, dual=FALSE) # Support Vector Machine
+)
 ```
+:::
 
 -   O **pipeline** é análogo ao pipe `%>%` do R:
 
@@ -160,19 +168,19 @@ model = Pipeline([
 
     -   Unifica e simplifica as etapas de pré-processamento, estimação e ajuste de hiperparâmetros, e previsões.
 
-## 
+## Ajuste do modelo
 
 -   <div>
 
-    > Os hiperparâmetros `n_components` e `C` definidos podem ser ajustados utilizando métodos de validação cruzada (Grid Search, Random Search etc.) sobre o pipeline.
+    > Os hiperparâmetros `n_components` e `C` definidos podem ser ajustados utilizando métodos de [validação cruzada](https://scikit-learn.org/stable/modules/cross_validation.html) (Grid Search, Random Search etc.) sobre o pipeline.
 
     </div>
 
 -   Com os hiperparâmetros definidos, ajusta-se o modelo aos dados de **treino**.
 
 ::: fragment
-```{python output=FALSE}
-model.fit(X_train, y_train);
+```{r warning=FALSE, output=FALSE}
+model$fit(X_train, y_train)
 ```
 :::
 
@@ -181,44 +189,55 @@ model.fit(X_train, y_train);
     > **(Vazamento de dados)**. O pipeline ajuda a reforçar o uso de apenas os dados de **treino** para o ajuste.
 
     </div>
+    
+## Performance do modelo
 
 -   Agora, a verificação da qualidade das previsões por meio da acurácia no conjunto de **teste**.
 
 ::: fragment
-```{python}
-from sklearn.metrics import accuracy_score
+```{r}
+metrics <- import("sklearn.metrics")
+y_pred_test <- model$predict(X_test)
 
-y_pred = model.predict(X_test)
-print("Precisão:", accuracy_score(y_test, y_pred))
+metrics$accuracy_score(y_test, y_pred_test)
 ```
 :::
 
-## Exportando os resultados para o R
+-   <div>
 
-Podemos enfim armazenar alguma parte de interesse do resultado para trazer para o R, por exemplo, as previsões do modelo.
+    > O scikit-learn dispõe de outras [métricas](https://scikit-learn.org/stable/modules/classes.html?highlight=metrics#classification-metrics) de performance para modelos de classificação, tais como: acurácia balanceada, precisão, recall, F1 etc.
 
-::: fragment
-```{python}
-y_pred = model.predict(X)
-```
-:::
+    </div>
 
--   De volta ao R, o objeto `y_pred` pode ser acessado através da lista `py`.
+## 
+
+- Como estamos num ambiente R, podemos usar de forma natural o `ggplot2` e fazer uma comparação gráfica entre o que foi observado e as previsões.
 
 ::: fragment
 ```{r eval=FALSE}
+test_data <- X_test
+test_data["y"] <- y_test
+test_data["y_pred"] <- y_pred_test
+
 library(ggplot2)
-breast_cancer$y_pred <- py$y_pred
-qplot(x=y_pred, y=y, data=breast_cancer, geom="jitter")
+ggplot(data=test_data, aes(x=y_pred, y=y))+
+  geom_jitter()
 ```
 :::
 
 ## 
 
-```{r fig.align='center'}
+```{r echo=FALSE, fig.align='center'}
+test_data <- X_test
+test_data["y"] <- y_test
+test_data["y_pred"] <- y_pred_test
+
 library(ggplot2)
-breast_cancer$y_pred <- py$y_pred
-qplot(x=y_pred, y=y, data=breast_cancer, geom="jitter")
+set.seed(1)
+qplot(x=y_pred, y=y, data=test_data, geom="jitter")+
+  scale_x_continuous(breaks=c(0, 1))+
+  scale_y_continuous(breaks=c(0, 1))+
+  theme_bw(base_size=16)
 ```
 
 # Materiais
