@@ -35,7 +35,7 @@ class(py_df)
 
 # Criando dicionário no Python
 repl_python(
-  input = "import
+  input = "
   dictionary = {'alpha': 1, 'beta': 2, 'lista': list(range(5))}
   print(dictionary)
   print(type(dictionary))"
