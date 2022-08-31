@@ -3,15 +3,15 @@ title: "Integração R e Python"
 ---
 
 <section>
-<h1 style="text-align: center">Reticulate, quando tudo da errado</h1>
+<h1 style="text-align: center">Pitfalls</h1>
 
 <img src="https://media0.giphy.com/media/97mAUmP8WfCiA/giphy.gif?cid=790b761192b66fd7aa51d5b40b5c71a2b0a66d2bed2680b1&rid=giphy.gif&ct=g" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
 </section>
 
 <section>
-<h1>Falta de suporte oficial para R</h1>
+<h2>Falta de suporte oficial para R</h2>
 
-<h4>Suporte oficial do Heroku</h4>
+<h4>Suporte oficial do Heroku <img src="https://www0.assets.heroku.com/assets/heroku-logotype-vertical-white-5fb5172731cfad3135d10af011da6d9fd1828b9c5cddb22e28e0e4625b747f74.png" style="width: 70px; height: 83px"></h4>
 
 :::: {.columns}
 
@@ -48,6 +48,53 @@ title: "Integração R e Python"
 :::
 
 ::::
+
+</section>
+
+<section>
+
+<h2>Conversando com APIs</h2>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<img src="https://guide.disnake.dev/public/disnake-logo.png" style="width: 288px; height: 288px"/>
+
+:::
+
+::: {.column width="50%"}
+
+<img src="https://www.iesve.com/eigg/img/logo/ies-logo-dark-camp.svg" style="width: 288px; height: 288px"/>
+
+:::
+
+:::: 
+
+</section>
+
+<section>
+
+<h2>Falta de escalabilidade</h2>
+
+- Quando o gasto de tempo não vale a pena (curva de aprendizado)
+
+<img src="https://media0.giphy.com/media/tQi5p4A1c7BRK/giphy.gif?cid=790b76110c1583fd00c83a5336b50e79717cf0282d5f3d7b&rid=giphy.gif&ct=g" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+
+</section>
+
+<section>
+
+<h2>Limitações do sistema</h2>
+
+- Falta de espaço em disco
+
+- Falta de RAM
+
+- Falta de Suporte
+
+<img src="https://thanosjs.org/assets/glove.png"/>
+<img src="src/equivalencias/ThanosJS.png"/>
 
 </section>
 
