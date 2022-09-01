@@ -62,3 +62,6 @@ title: "Integração R e Python"
 <section data-background-image="src/python_basico/Jupyter.jpeg" data-background-size="contain">
 </section>
 
+<section data-background-iframe="http://localhost:8000/capitulos/python_basico/jupyter_demo.html">
+
+</section>
