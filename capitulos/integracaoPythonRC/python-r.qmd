@@ -3,8 +3,7 @@ title: "Integração R e Python"
 ---
 
 ```{r echo=FALSE}
-if (!require("pacman")) install.packages("pacman")
-p_load(reticulate, Rcpp)
+pacman::p_load(reticulate, Rcpp)
 ```
 
 <section class="title-slide">
@@ -27,10 +26,14 @@ p_load(reticulate, Rcpp)
 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;"/>
 :::
 
-:::: {.column width="75%"}
-- Execução de scripts do Python interagindo com a sessão do R; 
-- Tradução entre objetos do R e do Python (como entre data frames do R e do Pandas);
+:::: {.column width="50%"}
+- Execução de scripts do Python interagindo com a sessão do R
 ::::
+
+:::: {.column width="50%"}
+- Tradução entre objetos do R e do Python (como entre data frames do R e do Pandas)
+::::
+
 ::::::
 </section>
 
@@ -53,7 +56,7 @@ ls("package:reticulate")
 use_virtualenv("./venv", required = TRUE)
 # py_install("pandas")
 # py_install("numpy")
-pd <- import("pandas", as = "pd", convert = FALSE)
+pandas_r <- import("pandas")
 ```
 
 ```{r}
