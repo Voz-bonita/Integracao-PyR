@@ -111,6 +111,8 @@ breast_cancer <- read_csv("./capitulos/scikit-learn/breast_cancer.csv")
 head(breast_cancer)
 ```
 
+## Exemplo: classificação de tumores de mama
+
 - O objetivo é identificar se um tumor é maligno (câncer de mama) ou benigno.
 
 ## 
@@ -166,6 +168,8 @@ model <- pipe$make_pipeline(
 ```
 :::
 
+##
+
 -   O **pipeline** é análogo ao pipe `%>%` do R:
 
     -   Sequência de transformações, seguida de um modelo;
@@ -213,12 +217,12 @@ metrics$accuracy_score(y_test, y_pred_test)
 
     </div>
 
-## 
+##
 
 - Como estamos num ambiente R, podemos usar de forma natural o `ggplot2` e fazer uma comparação gráfica entre o que foi observado e as previsões.
 
 ::: fragment
-```{r eval=T}
+```{r eval=T, out.width="50%", fig.align='center'}
 test_data <- X_test
 test_data["y"] <- y_test
 test_data["y_pred"] <- y_pred_test
@@ -228,21 +232,6 @@ ggplot(data=test_data, aes(x=y_pred, y=y))+
   geom_jitter()
 ```
 :::
-
-## 
-
-```{r eval=FALSE, echo=FALSE, fig.align='center'}
-test_data <- X_test
-test_data["y"] <- y_test
-test_data["y_pred"] <- y_pred_test
-
-library(ggplot2)
-set.seed(1)
-qplot(x=y_pred, y=y, data=test_data, geom="jitter")+
-  scale_x_continuous(breaks=c(0, 1))+
-  scale_y_continuous(breaks=c(0, 1))+
-  theme_bw(base_size=16)
-```
 
 # Materiais
 
