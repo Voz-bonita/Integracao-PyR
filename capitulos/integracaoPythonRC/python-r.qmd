@@ -52,7 +52,7 @@ ls("package:reticulate")
 use_virtualenv("./venv", required = TRUE)
 # py_install("pandas")
 # py_install("numpy")
-pandas_r <- import("pandas", as = "pd", convert = FALSE)
+pandas_r <- import("pandas")
 ```
 :::
 </section>
