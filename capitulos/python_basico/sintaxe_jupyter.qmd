@@ -28,7 +28,7 @@ title: "Integração R e Python"
 
 <img src="src/python_basico/pipFail.png" style="display: block; margin-left: auto; margin-right: auto; width: 800px; height: 140px"/>
 
-<img src="	https://i.kym-cdn.com/entries/icons/original/000/040/642/terrifiednootnoot.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 383px; height: 214px"/>
+<img src="https://i.kym-cdn.com/entries/icons/mobile/000/040/642/terrifiednootnoot.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 383px; height: 214px"/>
 
 </section>
 
