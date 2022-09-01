@@ -26,10 +26,14 @@ pacman::p_load(reticulate, Rcpp)
 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" style="width:192px;height:192px;"/>
 :::
 
-:::: {.column width="75%"}
-- Execução de scripts do Python interagindo com a sessão do R; 
-- Tradução entre objetos do R e do Python (como entre data frames do R e do Pandas);
+:::: {.column width="50%"}
+- Execução de scripts do Python interagindo com a sessão do R
 ::::
+
+:::: {.column width="50%"}
+- Tradução entre objetos do R e do Python (como entre data frames do R e do Pandas)
+::::
+
 ::::::
 </section>
 
