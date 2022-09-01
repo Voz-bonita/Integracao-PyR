@@ -3,8 +3,7 @@ title: "Integração R e Python"
 ---
 
 ```{r echo=FALSE}
-if (!require("pacman")) install.packages("pacman")
-p_load(reticulate, Rcpp)
+pacman::p_load(reticulate, Rcpp)
 ```
 
 <section class="title-slide">
@@ -53,7 +52,7 @@ ls("package:reticulate")
 use_virtualenv("./venv", required = TRUE)
 # py_install("pandas")
 # py_install("numpy")
-pd <- import("pandas", as = "pd", convert = FALSE)
+pandas_r <- import("pandas", as = "pd", convert = FALSE)
 ```
 :::
 </section>
