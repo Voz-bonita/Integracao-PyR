@@ -214,7 +214,7 @@ metrics$accuracy_score(y_test, y_pred_test)
 - Como estamos num ambiente R, podemos usar de forma natural o `ggplot2` e fazer uma comparação gráfica entre o que foi observado e as previsões.
 
 ::: fragment
-```{r eval=FALSE}
+```{r eval=T}
 test_data <- X_test
 test_data["y"] <- y_test
 test_data["y_pred"] <- y_pred_test
@@ -224,8 +224,6 @@ ggplot(data=test_data, aes(x=y_pred, y=y))+
   geom_jitter()
 ```
 :::
-
-<img src="src/scikit-learn/jitter.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
 
 ## 
 
