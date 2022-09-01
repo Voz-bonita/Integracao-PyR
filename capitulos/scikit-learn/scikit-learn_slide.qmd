@@ -97,7 +97,7 @@ virtualenv_create("venv",
 
 ## Exemplo: classificação de tumores de mama
 
-```{r include=FALSE, eval=TRUE, output=FALSE}
+```{r include=FALSE, eval=FALSE, output=FALSE}
 library(readr)
 breast_cancer <- read_csv("breast_cancer.csv")
 ```
@@ -225,9 +225,11 @@ ggplot(data=test_data, aes(x=y_pred, y=y))+
 ```
 :::
 
+<img src="src/scikit-learn/jitter.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+
 ## 
 
-```{r echo=FALSE, fig.align='center'}
+```{r eval=FALSE, echo=FALSE, fig.align='center'}
 test_data <- X_test
 test_data["y"] <- y_test
 test_data["y_pred"] <- y_pred_test
