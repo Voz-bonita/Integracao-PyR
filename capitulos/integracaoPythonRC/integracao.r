@@ -8,8 +8,9 @@ ls("package:reticulate")
 
 # Fazendo a instalação dos pacotes do Python através do R #
 use_virtualenv("./venv", required = TRUE)
-# py_install("pandas")
-# py_install("numpy")
+use_virtualenv("venv", required = TRUE)
+py_install("pandas")
+py_install("numpy")
 
 # Importando os pacotes por diferentes métodos (import e REPL) #
 # O REPL é um ambiente semelhante a um console em que você pode experimentar dinamicamente expressões UITest

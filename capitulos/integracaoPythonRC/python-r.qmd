@@ -55,6 +55,13 @@ use_virtualenv("./venv", required = TRUE)
 # py_install("numpy")
 pd <- import("pandas", as = "pd", convert = FALSE)
 ```
+
+```{r}
+use_virtualenv("venv", required = TRUE)
+# py_install("pandas")
+# py_install("numpy")
+pd <- import("pandas", as = "pd", convert = FALSE)
+```
 :::
 </section>
 
