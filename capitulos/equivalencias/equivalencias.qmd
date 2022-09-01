@@ -94,9 +94,9 @@ title: "Integração R e Python"
 - Falta de Suporte
 
 
-<img src="src/equivalencias/ThanosJS.png" style="display: block; margin-left: auto; margin-right: auto; width: 80%;"/>
+<img src="src/equivalencias/ThanosJS.png" class="fragment" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
-<img src="https://thanosjs.org/assets/glove.png" style="display: block; margin-left: auto; margin-right: auto; width: 180px; height: 180px"/>
+<img src="https://thanosjs.org/assets/glove.png" class="fragment" style="display: block; margin-left: auto; margin-right: auto; width: 100px; height: 100px"/>
 
 </section>
 
